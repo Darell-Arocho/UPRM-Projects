@@ -1,0 +1,153 @@
+#include<iostream>
+
+using namespace std;
+
+class Matriz{
+	
+	public:
+		
+		Matriz friend add(Matriz m_1, Matriz m_2);
+		
+		Matriz friend operator +(Matriz m_1, Matriz m_2);
+		
+		//Function to add an object with an integer
+		Matriz friend operator +(Matriz m_1, int num);
+		
+		//Constructors
+		Matriz();
+		
+		Matriz(int a1_1, int a1_2, int a2_1, int a2_2);
+		
+		//getters and setters
+		int getA11();	
+		int getA12();
+		int getA21();
+		int getA22();
+
+		void setA11(int a1_1);
+		void setA12(int a1_2);
+		void setA21(int a2_1);
+		void setA22(int a2_2);
+	
+		//Special member function
+		void display();
+		
+		
+		
+		
+	private:
+	
+		int a11, a12, a21, a22;
+	
+};
+
+
+int main(){
+	
+	Matriz M, m1(3, 4, 8, 19), m2(5, 7, 1, 23);
+
+	M = add(m1, m2);
+	M.display();
+
+	m1.setA11(5);
+	m2.setA21(78);
+
+	M = m1 + m2;
+	M.display();
+
+	m1.setA11(3);
+	m2.setA21(1);
+
+	M = m1 + 6;
+	M.display();
+
+	M = m2 + 10;
+	M.display();
+	
+	return 0;
+}
+
+
+Matriz::Matriz(){
+	a11 = 0;
+	a12 = 0;
+	a21 = 0;
+	a22 = 0;
+}
+
+Matriz::Matriz(int a1_1, int a1_2, int a2_1, int a2_2){
+	a11 = a1_1;
+	a12 = a1_2;
+	a21 = a2_1;
+	a22 = a2_2;
+}
+
+int Matriz::getA11(){
+	return a11;
+}
+		
+int Matriz::getA12(){
+	return a12;
+}
+
+int Matriz::getA21(){
+	return a21;
+}
+
+int Matriz::getA22(){
+	return a22;
+}
+
+void Matriz::setA11(int a1_1){
+	a11 = a1_1;
+}
+
+void Matriz::setA12(int a1_2){
+	a12 = a1_2;
+}
+
+void Matriz::setA21(int a2_1){
+	a21 = a2_1;
+}
+
+void Matriz::setA22(int a2_2){
+	a22 = a2_2;
+}
+
+Matriz add(Matriz m_1, Matriz m_2){
+	Matriz result;
+
+	result.a11 = m_1.a11 + m_2.a11;
+	result.a12 = m_1.a12 + m_2.a12;
+	result.a21 = m_1.a21 + m_2.a21;
+	result.a22 = m_1.a22 + m_2.a22;
+
+	return result;
+}
+
+Matriz operator +(Matriz m_1, Matriz m_2){
+	Matriz result;
+
+	result.a11 = m_1.a11 + m_2.a11;
+	result.a12 = m_1.a12 + m_2.a12;
+	result.a21 = m_1.a21 + m_2.a21;
+	result.a22 = m_1.a22 + m_2.a22;
+
+	return result;
+}
+
+Matriz operator +(Matriz m_1, int num){
+	Matriz result;
+
+	result.a11 = m_1.a11 + num;
+	result.a12 = m_1.a12 + num;
+	result.a21 = m_1.a21 + num;
+	result.a22 = m_1.a22 + num;
+
+	return result;
+}
+
+void Matriz::display(){
+	cout << "[" << a11 << " " << a12 << "]" << endl
+	<< "[" << a21 << " " << a22 << "]" << endl << endl;
+}
