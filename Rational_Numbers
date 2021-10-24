@@ -1,0 +1,103 @@
+#include<iostream>
+#include<cstdlib>
+
+using namespace std;
+
+class Rational{
+	public:
+		
+		Rational();
+		Rational(int wn);
+		Rational (int a, int b);
+		
+		Rational friend operator +(const Rational &f1, const Rational &f2);
+		Rational friend operator -(const Rational &f1, const Rational &f2);
+		Rational friend operator *(const Rational &f1, const Rational &f2);
+		Rational friend operator /(const Rational &f1, const Rational &f2);
+		ostream friend &operator <<(ostream &out, const Rational &f);
+		
+		
+		
+	private:
+	
+		int num;
+		int denom;
+	
+	
+	
+	
+};
+
+
+
+int main(){
+	
+	Rational r1, r2(5), r3(3,5);
+	
+	cout << r2 + r3 << endl;
+	cout << r2 - r3 << endl;
+	cout << r2 * r3 << endl;
+	cout << r2 / r3 << endl;
+	
+	
+	return 0;
+}
+
+Rational::Rational(int a, int b)
+{
+	
+	if(b == 0)
+	{
+		cout << "Wrong definition of rational." << endl;
+		exit(1);
+	}
+	else
+	{
+		num = a;
+		denom = b;
+	}
+}
+
+Rational::Rational()
+{
+	num = 0;
+	denom = 1;
+}
+
+Rational::Rational(int wn)
+{
+	num = wn;
+	denom = 1;
+}
+
+Rational operator +(const Rational &f1, const Rational &f2)
+{
+	//f1.num = 45;
+	return Rational(f1.num*f2.denom + f2.num*f1.denom, f1.denom*f2.denom);
+}
+
+Rational operator -(const Rational &f1, const Rational &f2)
+{
+	//f1.num = 45;
+	return Rational(f1.num*f2.denom - f2.num*f1.denom, f1.denom*f2.denom);
+}
+
+Rational operator *(const Rational &f1, const Rational &f2)
+{
+	//f1.num = 45;
+	return Rational(f1.num*f2.num, f1.denom*f2.denom);
+}
+
+Rational operator /(const Rational &f1, const Rational &f2)
+{
+	//f1.num = 45;
+	return Rational(f1.num*f2.denom, f2.num*f1.denom);
+}
+
+
+ostream &operator <<(ostream &out, const Rational &f)
+{
+	out << f.num << "/" << f.denom;
+	
+	return out;
+}
